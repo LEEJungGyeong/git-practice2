@@ -11,15 +11,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Step 1 - Start
-        run: echo "자동화 시작!"
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Step 2 - Check Environment
-        run: |
-          echo "현재 작업 위치:"
-          pwd
-          echo "운영체제:"
-          uname -s
+      - name: Show files
+        run: ls
 
-      - name: Step 3 - Finish
-        run: echo "모든 작업 완료!"
+      - name: Read README
+        run: cat README.md
