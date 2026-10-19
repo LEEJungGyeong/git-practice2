@@ -7,15 +7,14 @@ on:
     - cron: '0 0 * * 1'
 
 jobs:
-  hello:
+  build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - name: Build
+        run: echo "빌드 완료!"
 
-      - name: Show files
-        run: ls
-
-      - name: Read README
-        run: cat README.md
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test
+        run: echo "테스트 완료!"
