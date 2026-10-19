@@ -7,25 +7,18 @@ on:
     - cron: '0 0 * * 1'
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Build
-        run: exit 1
-
-      - name: Success Message
-        if: ${{ success() }}
-        run: echo "빌드 성공!"
-
-      - name: Failure Message
-        if: ${{ failure() }}
-        run: echo "빌드 실패!"
-
   test:
-    needs: build
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        python-version: ['3.9', '3.10', '3.11']
+
     steps:
-      - name: Test
-        run: echo "테스트 시작!"
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Check Version
+        run: python --version
