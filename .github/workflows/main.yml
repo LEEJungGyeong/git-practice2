@@ -7,17 +7,15 @@ on:
     - cron: '0 0 * * 1'
 
 jobs:
-  secret-test:
+  container-test:
     runs-on: ubuntu-latest
 
+    container:
+      image: python:3.11
+
     steps:
-      - name: Use Secret
-        env:
-          MY_KEY: ${{ secrets.MY_TEST_SECRET }}
-        run: |
-          if [ -n "$MY_KEY" ]; then
-            echo "Secret 전달 성공!"
-          else
-            echo "Secret 전달 실패!"
-            exit 1
-          fi
+      - name: Check Python
+        run: python --version
+
+      - name: Hello
+        run: python -c "print('Hello from container!')"
