@@ -7,18 +7,17 @@ on:
     - cron: '0 0 * * 1'
 
 jobs:
-  test:
+  secret-test:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        python-version: ['3.9', '3.10', '3.11']
-
     steps:
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python-version }}
-
-      - name: Check Version
-        run: python --version
+      - name: Use Secret
+        env:
+          MY_KEY: ${{ secrets.MY_TEST_SECRET }}
+        run: |
+          if [ -n "$MY_KEY" ]; then
+            echo "Secret 전달 성공!"
+          else
+            echo "Secret 전달 실패!"
+            exit 1
+          fi
