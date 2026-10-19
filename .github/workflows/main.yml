@@ -2,6 +2,7 @@ name: My First GitHub Action
 
 on:
   push:
+  workflow_dispatch: 
 
 jobs:
   hello:
